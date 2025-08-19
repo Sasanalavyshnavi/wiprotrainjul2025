@@ -1,0 +1,40 @@
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.flex-box {
+  border: 1px solid black;
+  width: 900px;
+  height: 550px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+
+.box-1-heading > h5,
+.box-2-heading > h5 {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.box-1,
+.box-2 {
+  border: 1px solid black;
+  width: 400px;
+  height: 450px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.box {
+  text-align: center;
+  /* border: 1px solid black; */
+  width: 150px;
+  height: 180px;
+  /* border-radius: 5px; */
+}
