@@ -1,4 +1,5 @@
 package com.wipro.payment_ms.kafka;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import com.wipro.payment_ms.service.PaymentService;
 @Component
 @RequiredArgsConstructor
 public class PaymentListener {
+	
 	 private final PaymentService paymentService;
 
 	    @KafkaListener(topics = "T1", groupId = "payment-group")

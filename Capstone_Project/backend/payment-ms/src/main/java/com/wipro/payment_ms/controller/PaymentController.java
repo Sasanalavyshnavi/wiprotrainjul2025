@@ -1,4 +1,5 @@
 package com.wipro.payment_ms.controller;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +10,7 @@ import com.wipro.payment_ms.service.PaymentService;
 @RequestMapping("/api/payments")
 @RequiredArgsConstructor
 public class PaymentController {
+	
 	private final PaymentService paymentService;
 
     @PostMapping("/simulate")
