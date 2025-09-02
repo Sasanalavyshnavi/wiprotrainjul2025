@@ -1,0 +1,7 @@
+com\wipro\flightdata_ms\config\CorsConfig.class
+com\wipro\flightdata_ms\controller\FlightController.class
+com\wipro\flightdata_ms\repository\FlightRepository.class
+com\wipro\flightdata_ms\FlightdataMsApplication.class
+com\wipro\flightdata_ms\entity\Flight.class
+com\wipro\flightdata_ms\service\FlightService.class
+com\wipro\flightdata_ms\service\impl\FlightServiceImpl.class
