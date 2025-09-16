@@ -1,17 +1,59 @@
-.container {
-  max-width: 800px;
-  background: #fff;
+/* Card Styles */
+.flight-card {
+  background: linear-gradient(135deg, #118dcb 0%, #25d8fc 100%);
+  color: white;
+  border-radius: 20px;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
-h2 {
-  font-weight: bold;
-  color: #333;
+/* Input Fields */
+.flight-input {
+  border-radius: 10px;
+  border: none;
 }
 
+.flight-input:focus {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  outline: none;
+}
+
+/* Swap Button */
 .swap-btn {
-  margin-top: 25px;
-  font-size: 20px;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  font-size: 1.2rem;
+  width: 50px;
+  height: 50px;
+  background-color: #ffcc00;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.swap-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Search Button */
+.search-btn {
+  background: linear-gradient(45deg, #ff512f, #dd2476);
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.search-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Labels */
+label {
+  color: #fff;
+}
+
+/* Card Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

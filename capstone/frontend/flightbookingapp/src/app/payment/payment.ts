@@ -28,26 +28,31 @@ export class Payment {
     this.bookingId = this.route.snapshot.params['bookingId'];
   }
 
-  simulatePayment() {
-    if (this.mode === 'CARD' && (!this.cardNumber || !this.expiryDate || !this.cvv)) {
+ simulatePayment() {
+  if (this.mode === 'CARD') {
+    if (!this.cardNumber || this.cardNumber.length !== 16 || !/^\d+$/.test(this.cardNumber)) {
+      alert('Card number must be 16 digits');
+      return;
+    }
+    if (!this.expiryDate || !this.cvv) {
       alert('Please fill in all card details');
       return;
     }
-    if (this.mode === 'UPI' && !this.upiId) {
-      alert('Please enter UPI ID');
-      return;
-    }
-
-    setTimeout(() => {
-      this.bookingService.getBookingStatus(this.bookingId).subscribe((res: any) => {
-        if (res.status === 'Successful') {
-          this.router.navigate(['/success', this.bookingId]);
-        } else {
-          this.router.navigate(['/failure']);
-        }
-      });
-    }, 3000);
   }
 
+  if (this.mode === 'UPI' && !this.upiId) {
+    alert('Please enter UPI ID');
+    return;
+  }
+
+  setTimeout(() => {
+    this.bookingService.getBookingStatus(this.bookingId).subscribe((res: any) => {
+      if (res.status === 'Successful') {
+        this.router.navigate(['/success', this.bookingId]);
+      } else {
+        this.router.navigate(['/failure']);
+      }
+    });
+  }, 3000);
 }
- 
+}

@@ -15,8 +15,9 @@ import { FormsModule } from '@angular/forms';
 export class SearchResults {
   flights: FlightDTO[] = [];
   filteredFlights: FlightDTO[] = [];
-  airlines = ["Indigo", "Air India", "SpiceJet", "GoAir"];
+  airlines = ["Indigo", "Air India", "SpiceJet", "GoAir", "Vistara", "Trujet"];
   selectedAirlines: string[] = [];
+
 
   constructor(private bookingService: Booking, private router: Router) {
     const search = history.state;
@@ -31,9 +32,11 @@ export class SearchResults {
     this.router.navigate(['/booking', flightId]);
   }
   applyFilters() {
-    this.filteredFlights = this.flights.filter(f =>
-      this.selectedAirlines.length === 0 || this.selectedAirlines.includes(f.airline)
+     this.filteredFlights = this.flights.filter(f => 
+      this.selectedAirlines.length === 3 || this.selectedAirlines.includes(f.airline) 
     );
+ 
+ 
   }
   onAirlineFilterChange(event: any, airline: string) {
     if (event.target.checked) {
@@ -43,6 +46,12 @@ export class SearchResults {
     }
     this.applyFilters();
   }
- 
+  getDuration(start: string | Date, end: string | Date): string {
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+  const diffMs = endDate.getTime() - startDate.getTime();
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  return `${days} days`;
+}
 }
  

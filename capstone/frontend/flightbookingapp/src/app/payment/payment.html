@@ -1,41 +1,92 @@
 <div class="container mt-5">
-  <h2>Payment</h2>
-
-  <form (ngSubmit)="simulatePayment()" #paymentForm="ngForm">
-    <div class="form-group">
-      <label>Select Payment Mode</label>
-      <select [(ngModel)]="mode" name="mode" class="form-control">
-        <option value="CARD">Card</option>
-        <option value="UPI">UPI</option>
-      </select>
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white">
+      <h4 class="mb-0">Payment</h4>
     </div>
+    <div class="card-body">
+      <form (ngSubmit)="simulatePayment()">
+        <label class="form-label mb-2">Select Payment Mode</label>
+        <div class="btn-group d-flex mb-3" role="group">
+          <input
+            type="radio"
+            class="btn-check"
+            name="mode"
+            id="cardMode"
+            value="CARD"
+            [(ngModel)]="mode"
+            required
+          />
+          <label class="btn btn-outline-primary w-100" for="cardMode">
+            💳 Card
+          </label>
 
-    <!-- Card Payment Section -->
-    <div *ngIf="mode === 'CARD'" class="mt-3">
-      <div class="form-group">
-        <label>Card Number</label>
-        <input type="text" [(ngModel)]="cardNumber" name="cardNumber" class="form-control" required>
-      </div>
-      <div class="form-group mt-2">
-        <label>Expiry Date</label>
-        <input type="month" [(ngModel)]="expiryDate" name="expiryDate" class="form-control" required>
-      </div>
-      <div class="form-group mt-2">
-        <label>CVV</label>
-        <input type="password" [(ngModel)]="cvv" name="cvv" class="form-control" required maxlength="3">
-      </div>
+          <input
+            type="radio"
+            class="btn-check"
+            name="mode"
+            id="upiMode"
+            value="UPI"
+            [(ngModel)]="mode"
+          />
+          <label class="btn btn-outline-success w-100" for="upiMode">
+            🧾 UPI
+          </label>
+        </div>
+
+        <!-- Card Details -->
+        <div *ngIf="mode === 'CARD'" class="mb-3">
+          <label class="form-label">Card Number</label>
+          <input
+            type="text"
+            class="form-control mb-2"
+            [(ngModel)]="cardNumber"
+            name="cardNumber"
+            maxlength="16"
+            pattern="\d{16}"
+            title="Card number must be exactly 16 digits"
+            required
+          />
+
+          <label class="form-label">Expiry Date</label>
+          <input
+            type="month"
+            class="form-control mb-2"
+            [(ngModel)]="expiryDate"
+            name="expiryDate"
+            required
+          />
+
+          <label class="form-label">CVV</label>
+          <input
+            type="password"
+            class="form-control"
+            maxlength="3"
+            [(ngModel)]="cvv"
+            name="cvv"
+            pattern="\d{3}"
+            title="CVV must be exactly 3 digits"
+            required
+          />
+        </div>
+
+        <!-- UPI Details -->
+        <div *ngIf="mode === 'UPI'" class="mb-3">
+          <label class="form-label">UPI ID</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="upiId"
+            name="upiId"
+            required
+          />
+        </div>
+
+        <div class="text-end">
+          <button type="submit" class="btn btn-success px-4">
+            Pay & Confirm
+          </button>
+        </div>
+      </form>
     </div>
-
-    <!-- UPI Payment Section -->
-    <div *ngIf="mode === 'UPI'" class="mt-3">
-      <div class="form-group">
-        <label>UPI ID</label>
-        <input type="text" [(ngModel)]="upiId" name="upiId" class="form-control" required placeholder="example@upi">
-      </div>
-    </div>
-
-    <button class="btn btn-success mt-3" type="submit">Pay & Confirm</button>
-  </form>
+  </div>
 </div>
-
-

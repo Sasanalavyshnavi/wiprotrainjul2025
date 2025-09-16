@@ -1,41 +1,49 @@
 <div class="container mt-4">
-  <h2>Search Results</h2>
-  <div class="row mb-4 filters">
-    <div class="col-md-4">
-      <h6>Filter by Airlines</h6>
-      <div *ngFor="let airline of airlines">
-        <input type="checkbox" (change)="onAirlineFilterChange($event, airline)" /> {{ airline }}
+  <h2 class="mb-4 text-center">✈ Flight Search Results</h2>
+  <div class="row">
+    <!-- Left: Filters -->
+    <div class="col-md-3">
+      <div class="card shadow-sm mb-3">
+        <div class="card-header bg-primary text-white">
+          <h6 class="mb-0">Filter by Airlines</h6>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let airline of airlines" class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" (change)="onAirlineFilterChange($event, airline)" id="{{airline}}" />
+            <label class="form-check-label" for="{{airline}}">
+              {{ airline }}
+            </label>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <table class="table" *ngIf="filteredFlights.length > 0; else noFlights">
-    <thead>
-      <tr>
-        <th>Airline</th>
-        <th>Source</th>
-        <th>Destination</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Price</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let flight of filteredFlights">
-        <td>{{ flight.airline }}</td>
-        <td>{{ flight.source }}</td>
-        <td>{{ flight.destination }}</td>
-        <td>{{ flight.startDate | date:'short' }}</td>
-        <td>{{ flight.endDate | date:'short' }}</td>
-        <td>₹{{ flight.price }}</td>
-        <td>
-          <button class="btn btn-primary" (click)="book(flight.flightId)">Book</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
-  <ng-template #noFlights>
-    <p>No flights found. Try again with different criteria.</p>
-  </ng-template>
+    <!-- Right: Flight Details -->
+    <div class="col-md-9">
+      <div *ngIf="filteredFlights.length > 0; else noFlights">
+        <div class="row g-3">
+          <div class="col-12" *ngFor="let flight of filteredFlights">
+            <div class="card shadow-sm mb-3 hover-shadow">
+              <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                  <h6 class="mb-1">{{ flight.airline }}</h6>
+                  <small class="text-muted">{{ flight.source }} → {{ flight.destination }}</small><br>
+                  <small class="text-muted">{{ flight.startDate | date:'short' }} - {{ flight.endDate | date:'short' }}</small>
+                </div>
+                <div class="text-end mt-2 mt-md-0">
+                  <p class="mb-1"><strong>Duration:</strong> {{ getDuration(flight.startDate, flight.endDate) }}</p>
+                  <p class="mb-1"><strong>Price:</strong> ₹{{ flight.price }}</p>
+                  <button class="btn btn-success btn-sm mt-1" (click)="book(flight.flightId)">Book Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noFlights>
+        <p class="text-center text-muted fs-5 mt-4">No flights found. Try adjusting your search criteria.</p>
+      </ng-template>
+    </div>
+  </div>
 </div>
